@@ -1,27 +1,26 @@
-import { useState } from 'react';
 import './App.css';
-import NavBar from './components/navbar/navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Layout from './layout/Layout';
+import Login from './pages/Login';
+import { Provider } from 'react-redux';
+import { appStore } from './store/app.store';
+import Home from './pages/Home';
+import Toaster from './components/toaster/toaster';
 
 function App() {
-  const [count, setCount] = useState(0);
   return (
     <>
-    <BrowserRouter basename='/'>
-     <Routes>
-       <Route path='/' element={<div>Base</div>}></Route>
-       <Route path='/login' element={ <div>Login</div> }></Route>
-     </Routes>
-     <header>
-       <NavBar/>
-     </header>
-     <main>
-
-     </main>
-     <footer>
-
-     </footer>
-    </BrowserRouter>
+      <Provider store={appStore}>
+        <Toaster/>
+        <BrowserRouter basename='/'>
+        <Routes>
+          <Route path='/' element={<Layout></Layout>}>
+            <Route path='/' element={ <Home/> }></Route>
+            <Route path='/login' element={ <Login/> }></Route>
+          </Route>
+        </Routes>
+        </BrowserRouter>
+      </Provider>
     </>
   )
 }
