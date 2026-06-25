@@ -5,6 +5,7 @@ import type { UserProfile } from "../shared/interfaces/users.interface";
 import { addUser } from "../store/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/app.store";
+import Feed from "../components/feed";
 
 export default function Home() {
     const  dispatch = useDispatch();
@@ -29,9 +30,9 @@ export default function Home() {
     },[]);
 
   return (
-    <>
-      <h1>Home Page</h1>
-    </>
+    <div className='flex justify-center my-10'>
+      <Feed/>
+    </div>
   )
 }
 
