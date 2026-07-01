@@ -1,18 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store/app.store";
 import { api } from "../../shared/api/api";
 import { environment } from "../../env/env.dev";
 import { showToaster } from "../../store/toasterSlice";
-import { Link, useNavigate } from "react-router-dom";
-import { removeUser } from "../../store/userSlice";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { addUser, removeUser } from "../../store/userSlice";
+import type { UserProfile } from "../../shared/interfaces/users.interface";
 
 function NavBar(){
     const [ tabIndex, setTabIndex ] = useState<number>(1);
     const  userSelector = useSelector((state:RootState) => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    console.log('userSelector',userSelector.isAuthenticated);
+    const locaiton = useLocation();
 
      const onLogout = async () => {
             try {
@@ -28,7 +29,6 @@ function NavBar(){
                     dispatch(removeUser());
                     navigate('/login');
                 }
-                // logout
             } catch (error){
                     dispatch(
                         showToaster({
@@ -37,18 +37,34 @@ function NavBar(){
                         })
                     );
             }
-        };
+     };
+
+     const fetchUser = async () => {
+           try {
+               let profileInfo = await api.get<{data:UserProfile}>(`${environment.url}/user/view`);
+               if(profileInfo.data.data){
+                   dispatch(addUser(profileInfo.data.data));
+               }
+           } catch(error){
+               console.error(error);
+           }
+    };
+
+    useEffect(() => {
+        if(locaiton.pathname !== '/login' && !userSelector.isAuthenticated){
+            fetchUser();
+        }
+    },[]);
 
     return (
         <div className="navbar bg-base-300 shadow-sm">
             <div className="flex-1">
-                <a className="btn btn-ghost text-xl">👨🏻‍💻 DevTinder</a>
+                <Link to={'/'} className="btn btn-ghost text-xl">👨🏻‍💻 DevTinder</Link>
             </div>
             <div className="flex gap-2">
                 <div className="dropdown dropdown-end">
                     {
                         userSelector.details && 
-
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar flex justify-end min-w-56">
                             <span>Welcome { userSelector.details.firstName }</span>
                             <div className="w-10 rounded-full">
@@ -60,11 +76,14 @@ function NavBar(){
                     tabIndex={tabIndex}
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                     <li>
-                        <span>
-                            <Link to={'/profile'} className="justify-between">
+                            <Link to='/profile' className="justify-between">
                                 Profile
                             </Link>
-                        </span>
+                    </li>
+                    <li>
+                            <Link to='/connection' className="justify-between">
+                                Connection
+                            </Link>
                     </li>
                     <li onClick={onLogout}><span>Logout</span></li>
                 </ul>
