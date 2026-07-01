@@ -1,19 +1,10 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { Feed } from "../shared/interfaces/feed.interface";
 
 
-interface Feed {
-    firstName: string,
-    lastName: string,
-    age: string,
-    about: string,
-    gender: string,
-    bio: string,
-    profilePicture: string,
-    skills: string[]
-};
 
 interface FeedInitialState {
-    feeds: Feed[] | null
+    feeds: Feed[]
 }
 
 const initialState: FeedInitialState = {
@@ -27,8 +18,9 @@ const feedSlice = createSlice({
         addFeeds(state, action: PayloadAction<Feed[]>) {
             state.feeds = action.payload;
         },
+
         removeFeeds(state) {
-            state.feeds = null;
+            state.feeds = [];
         }
     }
 });

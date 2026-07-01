@@ -1,11 +1,15 @@
-export interface UserProfile {
+export interface UserProfile extends UserId {
     firstName: string;
     lastName: string;
-    emailId: string;
-    age?: number;
-    gender?: string;
-    bio?: string;
-    profilePicture?: string;
-    about?: string,
-    skills?: string[]
+    age: string;
+    gender: string;
+    bio: string;
+    profilePicture: string;
+    about: string,
+    skills: string[]
 };
+
+export interface UserId {
+    _id: string
+}
+

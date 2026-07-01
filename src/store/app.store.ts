@@ -2,13 +2,15 @@ import { configureStore, } from "@reduxjs/toolkit";
 import userReduce from "./userSlice";
 import toasterSlice from "./toasterSlice";
 import feedSlice from "./feedSlice";
+import connectionSlice from "./connection";
 
 
 export const appStore = configureStore({
     reducer: {
         user: userReduce,
         toaster: toasterSlice,
-        feed: feedSlice
+        feed: feedSlice,
+        connection: connectionSlice,
     }
 });
 
