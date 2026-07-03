@@ -3,7 +3,7 @@ import type { RootState } from "../store/app.store";
 import { useEffect } from "react";
 import { api } from "../shared/api/api";
 import { environment } from "../env/env.dev";
-import { addFeeds } from "../store/feedSlice";
+import { addFeeds, removeFeed } from "../store/feedSlice";
 import type { Feed } from "../shared/interfaces/feed.interface";
 import UserCard from "./userCard";
 
@@ -28,13 +28,43 @@ export default function Feed() {
         }
     },[]);
 
+    const handleSwipe = async (userId: string, dir: 'left' | 'right') => {
+        console.log('handleSwipe', userId, dir);
+        const action = dir === 'right' ? 'interested' : 'ignore';
+
+        try {
+
+            const response = await api.post(`${environment.url}/request/send/${action}/${userId}`, {});
+            console.log('response', response.data);
+            dispatch(removeFeed(userId));
+
+        } catch (error) {
+            console.error('error handleSwipe',error);
+        }
+
+    };
+
+  if (feedSelector.length === 0) {
+        return (
+        <div className="flex items-center justify-center h-screen text-3xl font-bold">
+            No More Cards ❤️
+        </div>
+        );
+  }
+
   return (
     <>
-    {
-        feedSelector.map((user) => (
-            <UserCard key={user._id} user={user}/>
-        ))
-    }
+       <div className="flex flex-col items-center justify-center min-h-screen">
+              <div className="relative w-80 h-125">
+                {
+                    feedSelector.map((user,index) => {
+                        const isTop = index === 0;
+                        return <UserCard key={user._id} user={user} index={index} isTop={isTop} onSwipe={handleSwipe}/>
+                    }
+                    )
+                }
+              </div>
+       </div>
     </>
   )
 }

@@ -31,7 +31,6 @@ axiosInstance.interceptors.request.use(
         return config;
     },
     (error: AxiosError<ErrorResponse>) => {
-        console.log('request', error);
         return Promise.reject(error);
     }
 );
@@ -39,7 +38,6 @@ axiosInstance.interceptors.request.use(
 // Response Interceptor
 axiosInstance.interceptors.response.use(
     (response: AxiosResponse) => {
-        console.log('response', response);
         return response;
     },
     (error: AxiosError<ErrorResponse>) => {
@@ -48,7 +46,6 @@ axiosInstance.interceptors.response.use(
             message: error.response?.data?.message ?? error.message ?? "Something went wrong",
             success: false,
         };
-        console.log('normalized', normalized);
         const status = normalized.statusCode;
         switch (status) {
             case 401:
@@ -64,7 +61,6 @@ axiosInstance.interceptors.response.use(
             default:
                 console.error(error);
         }
-        console.log('response', error);
         return Promise.reject(normalized);
     }
 );

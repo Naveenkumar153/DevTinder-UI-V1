@@ -168,9 +168,9 @@ export default function Profile() {
             </div>
         </div>
         
-        <div>
+        <div className="relative w-80 h-125">
             {
-                userSelector.details && 
+                userSelector.details &&
                 <UserCard key={ userSelector.details._id} user={state} type="userInfo"/>
             }
         </div>

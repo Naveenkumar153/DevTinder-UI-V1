@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { Connections } from "../shared/interfaces/connection.interface";
+import type { UserProfile } from "../shared/interfaces/users.interface";
 
 
 const connectionSlice = createSlice({
     name: "connection",
     initialState: {
-        connections: [] as Connections[],
+        connections: [] as UserProfile[],
     },
     reducers: {
         setConnections(state, action) {

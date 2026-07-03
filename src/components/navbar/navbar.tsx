@@ -82,7 +82,12 @@ function NavBar(){
                     </li>
                     <li>
                             <Link to='/connection' className="justify-between">
-                                Connection
+                                Friends
+                            </Link>
+                    </li>
+                    <li>
+                            <Link to='/request' className="justify-between">
+                                Requests
                             </Link>
                     </li>
                     <li onClick={onLogout}><span>Logout</span></li>

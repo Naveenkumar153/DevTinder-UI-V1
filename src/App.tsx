@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Toaster from './components/toaster/toaster';
 import Profile from './components/profile/profile';
 import Connection from './pages/Connection';
+import Request from './pages/Request';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='/login' element={ <Login/> }></Route>
             <Route path='/profile' element={ <Profile/> }></Route>
             <Route path='/connection' element={ <Connection/> }></Route>
+            <Route path='/request' element={ <Request/> }></Route>
           </Route>
         </Routes>
         </BrowserRouter>
