@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Feed } from "../shared/interfaces/feed.interface";
 
 type CardType = 'feed' | 'userInfo';

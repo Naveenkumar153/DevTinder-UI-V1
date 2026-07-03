@@ -9,7 +9,7 @@ import { addUser, removeUser } from "../../store/userSlice";
 import type { UserProfile } from "../../shared/interfaces/users.interface";
 
 function NavBar(){
-    const [ tabIndex, setTabIndex ] = useState<number>(1);
+    const [ tabIndex, _setTabIndex ] = useState<number>(1);
     const  userSelector = useSelector((state:RootState) => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
