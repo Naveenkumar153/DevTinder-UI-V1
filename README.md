@@ -1,75 +1,36 @@
-# React + TypeScript + Vite
+# Deployment
+    ##EC2 Instance Creation
+        - Signup on AWS
+        - Create the instance
+        - chmod 400 <file>.pem
+        - ssh -i <file>.pem ec2 instance
+        - install node version 24.11.1
+        - git clone
+           - If we push latest changes again do the git pull 
+        - Front-end
+            - Install npm i 
+            - npm run build
+            - sudo apt update
+            - sudo apt install nginx
+            - to start nginx 
+                -> sudo systemctl start nginx
+                -> sudo systemctl enable nginx
+            - copy code from dist (build files) to /var/www/html
+            - before copy should run the build command (npm run build)
+            - sudo scp -r dist/* /var/www/html
+            - Enable port :80 for instance
+        
+        - Nginx command
+          - Is Nginx running => sudo systemctl status nginx
+          - Is Nginx listening on port 80? => sudo ss -tulpn | grep :80
+          - Check Nginx configuration => sudo nginx -t
+          - Can the server itself access the page? => curl http://localhost
+          - Verify files exist => ls -la /var/www/html
+          - Check the root configuration => cat /etc/nginx/sites-available/default
+          - Restart Nginx => sudo systemctl restart nginx
+          - Check firewall (Ubuntu) => sudo ufw status
+          - Check the public IP => curl ifconfig.me
+          - Check Nginx logs => sudo tail -50 /var/log/nginx/error.log
+                             => sudo tail -50 /var/log/nginx/access.log
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+          
