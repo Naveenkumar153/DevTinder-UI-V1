@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store/app.store";
-import { environment } from "../../env/env.dev";
 import { showToaster } from "../../store/toasterSlice";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../../store/userSlice";
@@ -17,7 +16,7 @@ function NavBar(){
 
      const onLogout = async () => {
             try {
-                let response = await api.post<{message:string}>(`${environment.url}/logout`, {});
+                let response = await api.post<{message:string}>(`/logout`, {});
                 console.log(response.data.message);
                 if(response.data.message){
                     dispatch(
@@ -41,7 +40,7 @@ function NavBar(){
 
      const fetchUser = async () => {
            try {
-               let profileInfo = await api.get<{data:UserProfile}>(`${environment.url}/user/view`);
+               let profileInfo = await api.get<{data:UserProfile}>(`/user/view`);
                if(profileInfo.data.data){
                    dispatch(addUser(profileInfo.data.data));
                }

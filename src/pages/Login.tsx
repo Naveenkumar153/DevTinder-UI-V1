@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { environment } from '../env/env.dev';
 import { useNavigate } from 'react-router-dom';
 import { showToaster } from '../store/toasterSlice';
 import axios from 'axios';
@@ -23,7 +22,7 @@ export default function Login() {
     const onLogin = async () => {
         try {
             setLoginLoader(true);
-            const endpoint = switchForm ? `${environment.url}/signup` : `${environment.url}/signin`;
+            const endpoint = switchForm ? `/signup` : `/signin`;
             const payload = switchForm ? { firstName, lastName, emailId, password } : { emailId, password };
             let response = await api.post<{user:UserProfile, message:string}>(endpoint, payload);
             if(response.status === 200 || response.status === 201){

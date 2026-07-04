@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { environment } from "../env/env.dev";
 import type { UserProfile } from "../shared/interfaces/users.interface";
 import { addUser } from "../store/userSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +12,7 @@ export default function Home() {
 
     const fetchUser = async () => {
       try {
-          let profileInfo = await api.get<{data:UserProfile}>(`${environment.url}/user/view`);
+          let profileInfo = await api.get<{data:UserProfile}>(`/user/view`);
           console.log('profileInfo',profileInfo.data.data);
           if(profileInfo.data.data){
               dispatch(addUser(profileInfo.data.data))

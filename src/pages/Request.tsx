@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/app.store";
-import { environment } from "../env/env.dev";
 import { addRequest } from "../store/requestSlice";
 import { showToaster } from "../store/toasterSlice";
 import { useEffect } from "react";
@@ -17,7 +16,7 @@ export default function Request() {
 
   const fetchRequests = async () => {
     try {
-       const response:any = await api.get<RequestResponse>(`${environment.url}/user/requests/received`);
+       const response:any = await api.get<RequestResponse>(`/user/requests/received`);
        console.log('response',response.data.data);
        dispatch(addRequest(response.data.data));
        dispatch(
@@ -41,7 +40,7 @@ export default function Request() {
   const handleRequestAction = async (value: RequestAction,id:string) => {
     console.log('handleRequestAction',value,id);
      try {
-        const response:any = await api.post(`${environment.url}/request/review/${value}/${id}`, { action: value });
+        const response:any = await api.post(`/request/review/${value}/${id}`, { action: value });
         console.log('response',response.data.data);
         dispatch(
             showToaster({

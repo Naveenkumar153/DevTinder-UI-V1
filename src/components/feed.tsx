@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "../store/app.store";
 import { useEffect } from "react";
-import { environment } from "../env/env.dev";
 import { addFeeds, removeFeed } from "../store/feedSlice";
 import type { Feed } from "../shared/interfaces/feed.interface";
 import UserCard from "./userCard";
@@ -14,7 +13,7 @@ export default function Feed() {
 
     const fetchFeed = async () => {
         try {
-            const feed = await api.get<{ data: Feed[] }>(`${environment.url}/feed`);
+            const feed = await api.get<{ data: Feed[] }>(`/feed`);
             console.log(feed);
             dispatch(addFeeds(feed.data.data))
         } catch (error) {
@@ -34,7 +33,7 @@ export default function Feed() {
 
         try {
 
-            const response = await api.post(`${environment.url}/request/send/${action}/${userId}`, {});
+            const response = await api.post(`/request/send/${action}/${userId}`, {});
             console.log('response', response.data);
             dispatch(removeFeed(userId));
 

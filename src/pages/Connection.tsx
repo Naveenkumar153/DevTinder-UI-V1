@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/app.store";
-import { environment } from "../env/env.dev";
 import { showToaster } from "../store/toasterSlice";
 import { setConnections } from "../store/connection";
 import type { ConnectionResponse } from "../shared/interfaces/connection.interface";
@@ -15,7 +14,7 @@ export default function Connection() {
 
   const fetchConnections = async () => {
     try {
-       const response = await api.get<ConnectionResponse>(`${environment.url}/user/connections`);
+       const response = await api.get<ConnectionResponse>(`/user/connections`);
        console.log('response',response.data);
        dispatch(setConnections(response.data.data));
        dispatch(
