@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "../store/app.store";
 import { useEffect } from "react";
-import { api } from "../shared/api/api";
 import { environment } from "../env/env.dev";
 import { addFeeds, removeFeed } from "../store/feedSlice";
 import type { Feed } from "../shared/interfaces/feed.interface";
 import UserCard from "./userCard";
+import { api } from "../shared/api/api";
 
 export default function Feed() {
 

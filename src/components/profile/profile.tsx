@@ -1,6 +1,5 @@
 import { useEffect, useReducer } from "react";
 import { environment } from "../../env/env.dev";
-import { api } from "../../shared/api/api";
 import type { UserProfile } from "../../shared/interfaces/users.interface";
 import type { RootState } from "../../store/app.store";
 import { addUser } from "../../store/userSlice";
@@ -8,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UserCard from "../userCard";
 import './profile.css'
 import type { Feed } from "../../shared/interfaces/feed.interface";
+import { api } from "../../shared/api/api";
 
 const initialState:Feed = {
     _id:'',

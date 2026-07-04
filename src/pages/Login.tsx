@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { environment } from '../env/env.dev';
-import { api } from '../shared/api/api';
 import { useNavigate } from 'react-router-dom';
 import { showToaster } from '../store/toasterSlice';
-import type { ErrorResponse } from '../shared/interfaces/api-error.interface';
 import axios from 'axios';
 import { addUser } from '../store/userSlice';
 import type { UserProfile } from '../shared/interfaces/users.interface';
+import type { ErrorResponse } from '../shared/interfaces/api-error.interface';
+import { api } from '../shared/api/api';
 
 export default function Login() {
     const navigate = useNavigate();

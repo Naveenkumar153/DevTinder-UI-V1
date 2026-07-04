@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store/app.store";
-import { api } from "../../shared/api/api";
 import { environment } from "../../env/env.dev";
 import { showToaster } from "../../store/toasterSlice";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../../store/userSlice";
 import type { UserProfile } from "../../shared/interfaces/users.interface";
+import { api } from "../../shared/api/api";
 
 function NavBar(){
     const [ tabIndex, _setTabIndex ] = useState<number>(1);

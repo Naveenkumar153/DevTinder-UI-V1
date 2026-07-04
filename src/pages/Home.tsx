@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { environment } from "../env/env.dev";
-import { api } from "../shared/api/api";
 import type { UserProfile } from "../shared/interfaces/users.interface";
 import { addUser } from "../store/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/app.store";
 import Feed from "../components/feed";
+import { api } from "../shared/api/api";
 
 export default function Home() {
     const  dispatch = useDispatch();

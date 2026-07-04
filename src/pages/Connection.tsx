@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/app.store";
 import { environment } from "../env/env.dev";
-import { api } from "../shared/api/api";
 import { showToaster } from "../store/toasterSlice";
 import { setConnections } from "../store/connection";
 import type { ConnectionResponse } from "../shared/interfaces/connection.interface";
 import ConnectionCard, { type ConnectionAction } from "../components/connectionCard";
+import { api } from "../shared/api/api";
 
 export default function Connection() {
 
