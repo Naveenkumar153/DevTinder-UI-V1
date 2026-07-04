@@ -3,7 +3,7 @@ import axios, {
     type InternalAxiosRequestConfig,
     type AxiosResponse,
 } from "axios";
-import { environment } from "../env/env.dev";
+import { environment } from "../env/environment";
 import type { ErrorResponse } from "../shared/interfaces/api-error.interface";
 
 
